@@ -1,0 +1,23 @@
+services:
+  discovery-service:
+    image: jeserna/discovery-service:v0.0.1165
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.discovery-service.entrypoints=web"
+      - "traefik.http.routers.discovery-service.rule=PathPrefix(`/api/`)"
+      - "traefik.http.services.discovery-service.loadbalancer.server.port=8080"
+    container_name: discovery-service
+    restart: unless-stopped
+    networks:
+      - dokploy-network
+    healthcheck:
+        test: ["CMD", "wget", "--spider", "-q", "http://localhost:8761/actuator/health/liveness"]
+        interval: 10s
+        timeout: 3s
+        retries: 3
+        start_period: 30s
+        start_interval: 10s
+
+networks:
+  dokploy-network:
+    external: true
