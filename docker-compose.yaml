@@ -1,11 +1,6 @@
 services:
   discovery-service:
     image: jeserna/discovery-service:v0.0.6
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.discovery-service.entrypoints=web"
-      - "traefik.http.routers.discovery-service.rule=PathPrefix(`/api/`)"
-      - "traefik.http.services.discovery-service.loadbalancer.server.port=8080"
     container_name: discovery-service
     restart: unless-stopped
     networks:
