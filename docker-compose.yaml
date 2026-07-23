@@ -1,6 +1,6 @@
 services:
   discovery-service:
-    image: jeserna/discovery-service:v0.0.6
+    image: jeserna/discovery-service:v0.0.11
     container_name: discovery-service
     restart: unless-stopped
     networks:
